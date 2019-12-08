@@ -1,0 +1,34 @@
+> customer_data = read.csv("Mall_Customers.csv")
+> str(customer_data)
+ 'data.frame':	200 obs. of  5 variables:
+ $ CustomerID            : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ Gender                : Factor w/ 2 levels "Female","Male": 2 2 1 1 1 1 ..
+ $ Age                   : int  19 21 20 23 31 22 35 23 64 30 ...
+ $ Annual.Income..k..    : int  15 15 16 16 17 17 18 18 19 19 ...
+ $ Spending.Score..1.100.: int  39 81 6 77 40 76 6 94 3 72 ...
+> a = table(customer_data$Gender)
+> a
+
+Female   Male 
+   112     88 
+
+> hist(customer_data$Age, col = "blue", main="Age Distribution", xlab="Age class", ylab="Frequency",labels = TRUE)
+
+ 
+> boxplot(customer_data$Age, col = "blue", main="Box plot of Age Distribution")
+> polygon(density(customer_data$Annual.Income..k..), col = "purple")
+
+ 
+K-means clustering
+Choosing optimal clusters using Silhouette method
+Library (cluster)
+Library (gridExtra)
+Library (grid)
+K6 = kmeans (customer_data [,3:5], 6, iter.max=100, nstart=50, algorithm = “Lloyd”)
+S6 = plot (silhouette (k6$cluster, dist (customer_data[,3:5], “Euclidean”)))
+ 
+
+fviz_nbclust(customer_data[,3:5], kmeans, method = "silhouette")
+
+ 
+
