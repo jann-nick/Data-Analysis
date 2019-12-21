@@ -1,0 +1,26 @@
+churn = read.csv("D:/Misc/Tele Churn/churn.csv")
+fit = glm(Churn~.,family="binomial",data=churn)
+nrow(churn)
+smp_size = floor(0.75*nrow(churn))
+smp_size
+set.seed(123)
+train_ind = sample(seq_len(nrow(churn)),size=smp_size)
+train = churn[train_ind,]
+test = churn[-train_ind,]
+fit = glm(Churn~.,family="binomial",data=train)
+predictedY = predict(fit, test, type = "response")
+library(caret)
+expectedY = test$Churn
+str(predictedY)
+str(expectedY)
+predictedY
+summary(predictedY)
+summary(fit)
+tapply(predictedY, test$Churn, mean)
+table(test$Churn, predictedY>0.5)
+install.packages("ROCR")
+library(ROCR)
+ROCRpred = prediction(predictedY, test$Churn)
+plot(ROCRpred)
+ROCRperf = performance(ROCRpred, "tpr", "fpr")
+plot(ROCRperf, colorize=TRUE)
