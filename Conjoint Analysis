@@ -1,0 +1,11 @@
+myConjointData = read.csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/06_02/conjoint-r.csv")
+myConjointDataProfileMatrix = read.csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/06_02/conjoint-r-level-names.csv")
+myConjointDataLevelNames = read.csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/06_02/conjoint-r-profiles-matrix.csv")
+str(myConjointDataLevelNames)
+head(myConjointDataLevelNames)
+install.packages("conjoint")
+library(conjoint)
+caUtilities(y=myConjointData, x=myConjointDataProfileMatrix, z=myConjointDataLevelNames)
+str(myConjointDataProfileMatrix)
+plot(caUtilities)
+myConjointData[1,]
