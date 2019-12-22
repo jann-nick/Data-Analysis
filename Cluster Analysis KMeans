@@ -1,0 +1,8 @@
+myClusterData = read.csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/05_02/cluster-r.csv")
+head(myClusterData)
+myClusterDataStandardized = scale(myClusterData[-1])
+head(myClusterDataStandardized)
+ourGroups = kmeans(myClusterDataStandardized,3)
+library(cluster)
+clusplot(myClusterDataStandardized, ourGroups$cluster)
+ourGroups$size
