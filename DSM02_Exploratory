@@ -1,0 +1,7 @@
+myExploratoryData = read.csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/02_02/exploratory-r.csv")
+hist(myExploratoryData$cpa)
+head(myExploratoryData)
+row.names(myExploratoryData) = myExploratoryData$keyword
+head(myExploratoryData)
+myDataMatrix = data.matrix(myExploratoryData)
+heatmap(myDataMatrix, Rowv=NA, Colv=NA, scale='column')
