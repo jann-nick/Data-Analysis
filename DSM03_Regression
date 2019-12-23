@@ -1,0 +1,7 @@
+myRegressionData = read.csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/03_02/regression-r.csv")
+plot(myRegressionData$BROADCAST, myRegressionData$NET.SALES)
+head(myRegressionData)
+mylm = lm(myRegressionData$NET.SALES ~ myRegressionData$BROADCAST)
+plot(mylm)
+lines(myRegressionData$BROADCAST, mylm$fitted)
+mylm$coeff
