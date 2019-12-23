@@ -1,0 +1,12 @@
+myPredictionData = read.csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/04_02/prediction-r.csv")
+table(myPredictionData$sales_classification)
+names(myPredictionData)
+install.packages("tree")
+library(tree)
+myDecisionTree = tree (sales_classification ~ capita + drive_by_traffic + complimentary_establishments + competition + 
+                        weather + unemployment_rate + var1 + var2 + var3, data=myPredictionData)
+plot(myDecisionTree)
+text(myDecisionTree)
+myPrunedTree = prune.tree(myDecisionTree, best=3)
+plot(myPrunedTree)
+text(myPrunedTree)
