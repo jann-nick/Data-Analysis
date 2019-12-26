@@ -1,0 +1,42 @@
+from sklearn import metrics
+from sklearn.tree import DecisionTreeClassifier, export_graphviz, export
+from sklearn.model_selection import train_test_split
+from scipy import stats
+import statsmodels.formula.api as smf
+import matplotlib.pyplot as plt
+import pydotplus as pdot
+import pandas as pd
+import seaborn as sns
+%matplotlib inline
+!pip install pydotplus
+!pip install sklearn
+!pip install sklearn.cross_validation
+!pip install seaborn
+
+myExploratoryData = pd.read_csv("exploratory-py.csv")
+myExploratoryData
+sns.kdeplot(myExploratoryData.cpa)
+sns.distplot(myExploratoryData.cpa)
+myETLData = myExploratoryData.pivot("keyword", "impressions", "cpa")
+myETLData
+
+sns.heatmap(myETLData)
+myRegressionData = pd.read_csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/03_03/regression-py.csv")
+myRegressionData
+myRegressionData.plot(kind='scatter', x='broadcast', y = 'sales')
+slope, intercept, r_value, p_value, std_err = stats.linregress(myRegressionData.broadcast, myRegressionData.sales)
+print("r-squared", r_value**2)
+myLinearModel = smf.ols(formula='sales ~ broadcast', data=myRegressionData).fit()
+myLinearModel.params
+
+myPredictionData = pd.read_csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/04_03/prediction-py.csv")
+myPredictionData.columns
+feature_cols = ['capita', 'competition', 'weather', 'var1', 'var2', 'var3']
+train_x, test_x, train_y, test_y = train_test_split(myPredictionData[feature_cols], myPredictionData['sales_classification'])
+depths_list = [2,3,4,5,6,7,8]
+for depth in depths_list:
+    clf_tree = DecisionTreeClassifier(max_depth=depth)
+    clf_tree.fit(train_x, train_y)
+clf_tree = DecisionTreeClassifier(max_depth=8)
+clf_tree.fit(train_x, train_y)
+tree_predict = clf_tree.predict(test_X)
