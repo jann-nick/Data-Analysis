@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import style
+from sklearn.cluster import KMeans
+
+%matplotlib inline
+
+myClusterData = pd.read_csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/05_03/cluster-py.csv")
+myClusterData.head(3)
+plt.scatter(myClusterData.b1, myClusterData.b3)
+style.use("ggplot")
+
+X = np.array([[16,11],[25,7],[18,9],[22,16],[5,16],[10,15],[21,16],[4,7],[30,17],[25,5]])
+myGroups = KMeans(n_clusters=3)
+myGroups.fit(X)
+centroids = myGroups.cluster_centers_
+labels = myGroups.labels_
+
+colors = ["b.","g.","r.","c.","m."]
+
+for i in range(len(X)):
+    plt.plot(X[i][0], X[i][1], colors[labels[i]], markersize=10)
+    
+plt.scatter(centroids[:,0], centroids[:,1], marker="x", s=150, linewidths=5)
+plt.show()
+
+import statsmodels.api as sm
+myConjointData = pd.read_csv("D:/Misc/Ex_Files_Data_Science_of_Marketing/Exercise_Files/06_03/conjoint-py.csv")
+myConjointData
+
+names = {"Rank":"Rank", "P1":"PhotoF1", "P2":"PhotoF2", "U1":"Ux1", 
+                        "U2":"Ux2", "D1":"SpecialSauce1", "D2":"SpecialSauce2","D13":"SpecialSauce3"}
+                        
+myConjointData.rename(columns=names, inplace=True)
+myConjointData.head(1)
+
+X = myConjointData[['PhotoF1', 'PhotoF2', 'Ux1', 'Ux2', 'SpecialSauce1', 'SpecialSauce2', 'SpecialSauce3']]
+X = sm.add_constant(X)
+Y = myConjointData.Rank
+myLinearRegressionForConjoint = sm.OLS(Y,X).fit()
+myLinearRegressionForConjoint.summary()
