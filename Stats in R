@@ -1,0 +1,17 @@
+install.packages("randomForest")
+install.packages("party")
+library(party)
+library(randomForest)
+
+qbinom(0.25,51,0.5)
+rbinom(8,150,0.4)
+pbinom(26,51,0.5)
+head(mtcars)
+input = mtcars[,c("am", "mpg", "hp")]
+result1 = aov(mpg~hp*am, data=input)
+summary(result1)
+result2 = aov(mpg~hp+am, data=input)
+summary(result2)
+print(anova(result1, result2))
+
+randomForest(nativeSpeaker ~ age + shoeSize + score, data=readingSkills)
