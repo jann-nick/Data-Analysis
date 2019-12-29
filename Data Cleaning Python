@@ -1,0 +1,31 @@
+import pandas as pd
+import numpy as np
+import warnings
+warnings.filterwarnings("ignore")
+
+data = {'name': ['A', 'B', 'C', 'D', 'E'],
+        'score': [1,2,3,4,5]}
+
+df = pd.DataFrame(data)
+print(df)
+
+df1 = df[(df['score']>1) & (df['score']<5)]
+print(df1)
+
+**********************************
+raw_data = {'student_name': ['Miller', 'Gillespie', 'McGrath', 'Sachin', 'Kohli', 'Ratnesh', 'Jann', 'Nota'],
+            'test_score': [78, 87, 97, 76, 87, 78, 88, np.NaN]}
+
+df = pd.DataFrame(raw_data, columns=['student_name', 'test_score'])
+print(df)
+
+grades = []
+for row in df['test_score']:
+    if(row>95): grades.append('A')
+    elif(row>90): grades.append('A-')
+    elif(row>80): grades.append('B')
+    elif(row>70): grades.append('B-')
+    else: grades.append('Failed')
+
+df['grades'] = grades
+print(df)
