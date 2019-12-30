@@ -1,0 +1,37 @@
+Sort
+********************
+import pandas as pd
+import numpy as np
+import warnings
+warnings.filterwarnings("ignore")
+
+data = {'name': ['Ram', 'Rahim', 'Hanna', 'Arjun', 'Qualish'],
+        'year': [2012, 2013, 2014, 2015, 2015],
+        'reports': [1, 2, 2, 1, 4],
+        'coverage': [2, 3, 4, 1, 2]}
+
+df = pd.DataFrame(data, index=['Cochie', 'Pima', 'Santa', 'Mari', 'Yuma'])
+print(df)
+
+print(df.sort_values(by='reports', ascending=0))
+print(df.sort_values(by='coverage', ascending=1))
+print(df.sort_values(by=['coverage', 'reports']))
+
+Replace
+*********************
+df = pd.DataFrame(data, columns=['name', 'year', 'reports', 'coverage'])
+print(df)
+
+print(df.replace(2,999))
+
+Search
+*********************
+print(df['year'].where(df['reports']>2))
+
+Rank
+**********************
+df['coverageRanked'] = df['coverage'].rank(ascending=True)
+print(df)
+
+df['coverageRanked'] = df['coverage'].rank(ascending=False)
+print(df)
