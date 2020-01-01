@@ -35,3 +35,11 @@ print(df)
 
 df['coverageRanked'] = df['coverage'].rank(ascending=False)
 print(df)
+
+Format
+**********************
+first_names = pd.Series(['Steve Murray', 'Jane Fonda', 'Sara McGully', 'Mary Jane'])
+print("A", first_names.str.lower())
+print("B", first_names.str.upper())
+print("C", first_names.str.title())
+print("D", first_names.str.capitalize())
