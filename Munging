@@ -43,3 +43,12 @@ print("A", first_names.str.lower())
 print("B", first_names.str.upper())
 print("C", first_names.str.title())
 print("D", first_names.str.capitalize())
+
+Duplicate
+**********************
+import pandas as pd
+raw_data = {'first_name': ['Jason', 'Jason', 'Mike'], 'last_name': ['Miller', 'Miller', 'Coors']}
+df = pd.DataFrame(raw_data, columns=['first_name', 'last_name'])
+print(df)
+print(df.duplicated())
+
