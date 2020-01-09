@@ -1,0 +1,6 @@
+from sklearn import datasets
+boston = datasets.load_boston()
+x = boston.data
+print(x.shape)
+y = boston.target
+print(y.shape)
