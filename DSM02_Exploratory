@@ -5,3 +5,4 @@ row.names(myExploratoryData) = myExploratoryData$keyword
 head(myExploratoryData)
 myDataMatrix = data.matrix(myExploratoryData)
 heatmap(myDataMatrix, Rowv=NA, Colv=NA, scale='column')
+// From LinkedIn Learning
