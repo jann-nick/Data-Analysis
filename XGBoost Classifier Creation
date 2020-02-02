@@ -1,0 +1,51 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+from sklearn import datasets
+from sklearn import metrics
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.style.use('ggplot')
+
+import xgboost as xgb
+
+#Load iris dataset
+dataset = datasets.load_breast_cancer()
+X = datasets.data;
+y = datasets.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
+
+#Fit a CART model to data
+model = xgb.XGBClassifier()
+model.fit(X_train, y_train)
+print(model)
+
+#Make predictions
+expected_y = y_test
+predicted_y = model.predict(X_test)
+
+#Summarize fit of model
+print(metrics.classification_report(expected_y, predicted_y))
+print(metrics.confusion_matrix(expected_y, predicted_y))
+
+#Load Boston dataset
+dataset = datasets.load_boston()
+X = dataset.data; y = dataset.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
+
+#Fit CART model to the data
+model = xgb.XGBClassifier()
+model.fit(X_train, y_train)
+print(model)
+
+#make prediction
+expected_y = y_test
+predicted_y = model.predict(X_test)
+
+#summarize fit of model
+print(metrics.r2_score(expected_y, predicted_y))
+print(metrics.mean_square_log_error(expected_y, predicted_y))
+plt.figure(figsize=(10,10))
+sns.regplot(expected_y, predicted_y, fit_reg=True, scatter_kws={"s": 100})
