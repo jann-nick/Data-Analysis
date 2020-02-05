@@ -1,0 +1,27 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+import pandas as pd
+
+raw_data = {'regiment': ['Nighthawks', 'Nighthawks', 'Nighthawks', 'Nighthawks',
+                         'Dragoons', 'Dragoons', 'Dragoons', 'Dragoons',
+                         'Scouts', 'Scouts', 'Scouts', 'Scouts'],
+            'company': ['1st', '1st', '2nd', '2nd', '1st', '1st', '2nd',
+                        '2nd', '1st', '1st', '2nd', '2nd'],
+            'TestScore': [4, 24, 31, 2, 3, 4, 24, 31, 2, 3, 2, 3]}
+
+df = pd.DataFrame(raw_data, columns=['regiment', 'company', 'TestScore'])
+print(df)
+
+#Pivot table of group means, by company and regiment
+df1 = pd.pivot_table(df, index=['regiment', 'company'], aggfunc='mean')
+print(df1)
+
+df2 = pd.pivot_table(df, index=['regiment', 'company'], aggfunc='count')
+print(df2)
+
+df3 = pd.pivot_table(df, index=['regiment', 'company'], aggfunc='max')
+print(df3)
+
+df4 = pd.pivot_table(df, index=['regiment', 'company'], aggfunc='min')
+print(df4)
