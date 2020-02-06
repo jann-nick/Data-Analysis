@@ -1,0 +1,36 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+import pandas as pd
+import numpy as np
+
+data = {'name': ['Jason', 'Molly', 'Tina', 'Jake', 'Amy'],
+            'year': [2012, 2012, 2013, 2014, 2014],
+            'reports': [4, 24, 31, 2, 3],
+            'coverage': [25, 94, 57, 62, 70]}
+
+df = pd.DataFrame(data, index=['Cochice', 'Pima', 'Santa Cruz', 'Maricopa', 'Yuma'])
+print(df)
+
+capitalizer = lambda x: x.upper()
+
+#Apply capitalizer to column 'name'
+print(df['name'].apply(capitalizer))
+
+#Map capitalizer over each element in 'name'
+print(df['name'].map(capitalizer))
+
+#Drop string variable so applymap can run
+df = df.drop('name', axis=1)
+print(df)
+
+#Return square root of every cell in dataframe using applymap
+print(df.applymap(np.sqrt))
+
+#Create function that multiplies all non-strings by 100
+def times100(x):
+    if type(x) is str: return x
+    elif x: return 100*x
+    else: return
+
+print(df.applymap(times100))
