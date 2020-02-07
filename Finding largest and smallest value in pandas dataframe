@@ -1,0 +1,20 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+import pandas as pd
+
+raw_data = {'first_name': ['Jason', 'Molly', 'Jumpy', 'Cabbie', 'Neckie'],
+            'last_name': ['Miller', 'Yarl', 'Ole', 'Ron', 'Rev'],
+            'age': [42, 43, 54, 64, 34],
+            'preTestScore': [5, 34, 52, 21, 43],
+            'postTestScore': [23, 43, 42, 23, 43]
+            }
+
+df = pd.DataFrame(raw_data, columns=['first_name', 'last_name', 'age', 'preTestScore', 'postTestScore'])
+
+print(df)
+
+#Index of row with highest and lowest value in preTestScore column
+
+print("Index with highest value:"); print(df['preTestScore'].idxmax())
+print("Index with lowest value:"); print(df['preTestScore'].idxmin())
