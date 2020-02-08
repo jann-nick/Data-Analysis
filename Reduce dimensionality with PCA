@@ -1,0 +1,37 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn import datasets
+
+# Load digits data
+digits = datasets.load_digits()
+
+# Standardize feature matrix
+X = StandardScaler().fit_transform(digits.data)
+print(X)
+
+# Conduct PCA
+# Create PCA that will retain 85% of variance
+pca = PCA(n_components=0.85, whiten=True)
+
+# Conduct PCA
+X_pca = pca.fit_transform(X)
+print(X_pca)
+
+# Show results
+print('Original number of features:', X.shape[1])
+print('Reduce number of features:', X.pca_shape[1])
+
+# Create PCA with 2 components
+pca = PCA(n_components=2, whiten=True)
+
+# Conduct PCA
+X_pca = pca.fit_transform(X)
+print(X_pca)
+
+# Show results
+print('Original number of features: ', X.shape[1])
+print('Reduced number of features: ', X_pca.shape[1])
+
