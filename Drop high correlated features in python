@@ -1,0 +1,32 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+import pandas as pd
+import numpy as np
+from sklearn.datasets import load_iris
+
+iris = load_iris()
+
+#Create feature and target
+X = iris.data; print(X)
+Y = iris.target; print(Y)
+
+#Convert feature matrix to dataframe
+df = pd.DataFrame(X)
+print(df)
+
+#Create correlation matrix
+corr_matrix = df.corr().abs()
+print(corr_matrix)
+
+#Select upper triangle of correlation matrix
+upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(np.bool))
+print(upper)
+
+#Find index of feature columns with correlation greater than 0.95
+to_drop = [column for column in upper.columns if any(upper[column]>0.95)]
+print(to_drop)
+
+#Drop marked features
+df1 = df1.drop(df.columns[to_drop], axis=1)
+print(df1)
