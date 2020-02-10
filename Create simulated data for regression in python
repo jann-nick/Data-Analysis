@@ -1,0 +1,18 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+import pandas as pd
+from sklearn.datasets import make_regression
+
+# Create simulated data
+# Generate features outputs and coefficients of 100 samples
+features, outputs, coef = make_regression(n_samples=100, n_features=3, n_informative=3, n_targets=1, noise=0, coef=True)
+
+# View features of first five rows
+print(pd.DataFrame(features, columns=['F1', 'F2', 'F3']).head())
+
+# View output of first five rows
+print(pd.DataFrame(outputs, columns=['Target']).head())
+
+# View actual, true coefficients used to generate data
+print(pd.DataFrame(coef, columns=['True coefficient values']))
