@@ -1,0 +1,23 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+import pandas as pd
+from sklearn.datasets import make_blobs
+import matplotlib.pyplot as plt
+
+#Make features (X) and output (Y) with 2000 samples
+features, clusters = make_blobs(n_samples=2000, n_features=10, centers=5,
+                                #With .5 cluster standard deviation
+                                cluster_std=0.4,
+                                shuffle=True)
+
+#View first five observations and their 10 features
+print("Feature Matrix: ")
+print(pd.DataFrame(features, columns=['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4', 'Feature 5',
+                                      'Feature 6', 'Feature 7', 'Feature 8', 'Feature 9', 'Feature 10',]).head())
+
+#Scatterplot of first and second features
+plt.scatter(features[:,0], features[:,1])
+
+#Show scatterplot
+plt.show()
